@@ -1,6 +1,6 @@
 import client from "./client.js";
 
-const API_KEY = VISUAL_CROSSING_API_KEY;
+const API_KEY = process.env.VISUAL_CROSSING_API_KEY;
 const baseUrl =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 // create Redis
