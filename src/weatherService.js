@@ -1,4 +1,3 @@
-import { json } from "express";
 import client from "./client";
 
 const API_KEY = VISUAL_CROSSING_API_KEY;
@@ -13,7 +12,7 @@ const checkCache = async (location) => {
 
 // fetch from the weather Api
 
-const fetchWeather = async (location) => {
+const fetchFromAPI = async (location) => {
   const url = `${baseUrl}/${location}?/key=${API_KEY}`;
   const response = await fetch(url);
   return response;
