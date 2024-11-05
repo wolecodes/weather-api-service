@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 router.get("/current", getWeatherData);
 
-app.use("/api/v1/weather");
+app.use("/api/v1/weather", router);
 
 //Listen to server.
 app.listen(3000, () => {
