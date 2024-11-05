@@ -1,4 +1,4 @@
-import express, { application } from "express";
+import express from "express";
 import { Router } from "express";
 import morgan from "morgan";
 
