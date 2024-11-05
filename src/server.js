@@ -1,3 +1,4 @@
+import getWeatherData from "./controller.js";
 import express from "express";
 import { Router } from "express";
 import morgan from "morgan";
@@ -11,6 +12,10 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
+
+router.get("/current", getWeatherData);
+
+app.use("/api/v1/weather");
 
 //Listen to server.
 app.listen(3000, () => {

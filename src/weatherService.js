@@ -1,4 +1,4 @@
-import client from "./client";
+import client from "./client.js";
 
 const API_KEY = VISUAL_CROSSING_API_KEY;
 const baseUrl =
@@ -25,7 +25,7 @@ const saveCache = async (location, data) => {
   await client.setEx(cacheKey, 900, JSON.parse(data));
 };
 
-export const getWeather = async (location) => {
+export default async function getWeather(location) {
   try {
     const cacheData = await checkCache(location);
     if (cacheData) {
@@ -35,7 +35,7 @@ export const getWeather = async (location) => {
         source: "cache",
       };
     }
-    const weatherData = await fetchWeather(location);
+    const weatherData = await fetchFromAPI(location);
     await saveCache(weatherData);
 
     return {
@@ -49,4 +49,4 @@ export const getWeather = async (location) => {
       error: error.message,
     };
   }
-};
+}
