@@ -18,3 +18,14 @@ const fetchWeather = async (location) => {
   const response = await fetch(url);
   return response;
 };
+
+// Save to cache
+
+const saveCache = async (location, data) => {
+  const cacheKey = `weather${location}`;
+  await client.setEx(cacheKey, 900, JSON.parse(data));
+};
+
+export const getWeather = async(location) => {
+  
+}
