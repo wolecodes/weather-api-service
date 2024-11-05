@@ -26,11 +26,28 @@ const saveCache = async (location, data) => {
   await client.setEx(cacheKey, 900, JSON.parse(data));
 };
 
-export const getWeather = async(location) => {
-
+export const getWeather = async (location) => {
   try {
-    const cacheData = await 
+    const cacheData = await checkCache(location);
+    if (cacheData) {
+      return {
+        success: true,
+        data: cacheData,
+        source: "cache",
+      };
+    }
+    const weatherData = await fetchWeather(location);
+    await saveCache(weatherData);
+
+    return {
+      success: true,
+      data: weatherData,
+      source: "api",
+    };
   } catch (error) {
-    
+    return {
+      success: false,
+      error: error.message,
+    };
   }
-}
+};
