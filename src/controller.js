@@ -1,3 +1,4 @@
+import { getWeather } from "./weatherService";
 // Get a weather data
 /**
  * getWeather
@@ -5,7 +6,7 @@
  * return a weather data
  */
 
-export const getWeather = async (req, res) => {
+export const getWeatherData = async (req, res) => {
   const { location } = req;
 
   if (!location) {
