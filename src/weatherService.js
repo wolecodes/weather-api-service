@@ -5,7 +5,7 @@ const API_KEY = VISUAL_CROSSING_API_KEY;
 const baseUrl =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 // create Redis
-const createCache = async (location) => {
+const checkCache = async (location) => {
   const cacheKey = `weather${location}`;
   const data = await client.get(cacheKey);
   return data ? JSON.parse(data) : null;
@@ -27,5 +27,10 @@ const saveCache = async (location, data) => {
 };
 
 export const getWeather = async(location) => {
-  
+
+  try {
+    const cacheData = await 
+  } catch (error) {
+    
+  }
 }
