@@ -1,5 +1,6 @@
 # Dependency directories
 node_modules/
 
+.vscode/
 # ignore envrionment variable
 .env

@@ -1,28 +1,36 @@
+import { compile } from "morgan";
 import client from "./client.js";
+import dotenv from "dotenv";
+dotenv.config();
 
-const API_KEY = process.env.VISUAL_CROSSING_API_KEY;
+const apiKey = process.env.WEATHER_API_KEY;
 const baseUrl =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 // create Redis
+
 const checkCache = async (location) => {
   const cacheKey = `weather${location}`;
   const data = await client.get(cacheKey);
   return data ? JSON.parse(data) : null;
 };
-
 // fetch from the weather Api
 
 const fetchFromAPI = async (location) => {
-  const url = `${baseUrl}/${location}?/key=${API_KEY}`;
+  console.log(location);
+  const url = `${baseUrl}/${location}/today?unitGroup=metric&key=${apiKey}`;
   const response = await fetch(url);
-  return response;
+  if (!response.ok) {
+    throw new Error("Unable to fetch data");
+  }
+  return response.json();
 };
 
 // Save to cache
 
 const saveCache = async (location, data) => {
   const cacheKey = `weather${location}`;
-  await client.setEx(cacheKey, 900, JSON.parse(data));
+
+  await client.setEx(cacheKey, 900, JSON.stringify(data)); // stringify if it's an object
 };
 
 export default async function getWeather(location) {
@@ -36,7 +44,8 @@ export default async function getWeather(location) {
       };
     }
     const weatherData = await fetchFromAPI(location);
-    await saveCache(weatherData);
+    console.log(weatherData);
+    await saveCache(location, weatherData);
 
     return {
       success: true,

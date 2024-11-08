@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
-router.get("/current", getWeatherData);
+router.get("/current/:location", getWeatherData);
 
 app.use("/api/v1/weather", router);
 

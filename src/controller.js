@@ -7,7 +7,9 @@ import getWeather from "./weatherService.js";
  */
 
 export default async function getWeatherData(req, res) {
-  const { location } = req;
+  const { location } = req.params;
+
+
 
   if (!location) {
     return res.status(400).json({
