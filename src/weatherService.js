@@ -45,6 +45,7 @@ export default async function getWeather(location) {
     }
     const weatherData = await fetchFromAPI(location);
     console.log(weatherData);
+    // save date  to cache 
     await saveCache(location, weatherData);
 
     return {
