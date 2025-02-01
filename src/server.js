@@ -12,7 +12,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
-
+// get to handle user request
 router.get("/current/:location", getWeatherData);
 
 app.use("/api/v1/weather", router);
